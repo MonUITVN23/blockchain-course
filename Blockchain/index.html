@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Blockchain Course</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        #canvas {
+            width: 95%;
+            max-width: 1680px;
+            height: 775px; /* 16:9 aspect ratio, larger size */
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease-in-out, visibility 0.6s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 1em; /* Base font size */
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .slide-title-page {
+            background: url('assets/background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            color: #2C3E50;
+            padding: 0;
+            margin: 0px;
+            text-align: left;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            overflow: hidden;
+            height: calc(100% - 0px);
+            border-radius: 8px;
+        }
+        
+        .title-content {
+            position: relative;
+            z-index: 10;
+            padding: 30px;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        
+        .main-title {
+            font-size: 2.4em;
+            color: #5A6B7C;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: right;
+            margin-top: 225px;
+        }
+        
+        .slide-title-page h1 {
+            font-size: 4.6em;
+            color: #2C3E50;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+            line-height: 1.1;
+            text-align: right;
+            text-shadow: none;
+        }
+        
+        .instructor-info {
+            font-size: 1.8em;
+            color: #5A6B7C;
+            font-weight: 500;
+            text-align: right;
+            margin-top: auto;
+            margin-bottom: 130px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .instructor-info span {
+            background-color: #e6eaf1;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+        }
+        
+        .title-page-logo {
+            position: absolute;
+            top: 50px;
+            right: 150px;
+            max-width: 600px;
+            max-height: 600px;
+            opacity: 0.8;
+            z-index: 10;
+        }
+        
+        .logos-container {
+            display: none;
+        }
+        
+        .logo-item {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(90deg, #4ECDC4, #44A08D);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+            z-index: 15;
+        }
+        
+        .course-info {
+            color: white;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .lecture-number {
+            color: white;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        .slide-title-page p {
+            font-size: 1.2em;
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+        h2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            font-size: 2.6em;
+            color: #0077B6;
+            border-bottom: 3px solid #ADE8F4;
+            padding: 30px 60px 20px 60px;
+            margin: 0;
+            background-color: white;
+            z-index: 5;
+        }
+        
+        .slide-content {
+            padding: 120px 60px 40px 60px;
+            height: 100%;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        h3 {
+            font-size: 2em;
+            color: #005A8D;
+            margin-top: 20px;
+        }
+        ul { 
+            list-style: none; 
+            padding-left: 0; 
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+        li {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+            padding-left: 30px;
+            position: relative;
+        }
+        li::before {
+            content: '🔹';
+            color: #00B4D8;
+            position: absolute;
+            left: 0;
+            font-size: 1.1em;
+        }
+        p { font-size: 1.5em; line-height: 1.6; }
+        strong { color: #005A8D; }
+        .image-container {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            max-height: 250px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+            font-size: 1.5em;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #0077B6;
+            color: white;
+        }
+        tr:nth-child(even) { background-color: #f2faff; }
+        .animation-text {
+            font-size: 1.2em;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            padding: 20px;
+            background: #f6faff;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .footer { position: absolute; bottom: 20px; left: 60px; font-size: 1em; color: #777; }
+        .slide-counter { position: absolute; bottom: 20px; right: 60px; font-size: 0.9em; font-weight: bold; color: #0077B6; }
+        
+        .progress-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 20px;
+            z-index: 100;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #E0E0E0;
+            border-radius: 4px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0077B6, #00B4D8);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-scrubber {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-image: url('assets/scrubber.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: grab;
+            z-index: 10;
+            transition: left 0.3s ease;
+        }
+        
+        .progress-scrubber:active {
+            cursor: grabbing;
+        }
+        
+        .progress-scrubber::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .progress-scrubber[data-no-image]::before {
+            display: block;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            max-width: 400px;
+            max-height: 400px;
+            opacity: 0.8;
+            z-index: 10;
+        }
+        .slide-title-page .logo {
+            top: 30px;
+            right: 30px;
+            max-width: 150px;
+            max-height: 150px;
+            opacity: 0.9;
+        }
+        
+        .title-page-logo {
+            position: absolute;
+            top: 50px;
+            right: 150px;
+            max-width: 600px;
+            max-height: 600px;
+            opacity: 0.8;
+            z-index: 10;
+        }
+        
+        .course-button {
+            position: fixed;
+            left: 0px;
+            top: 23%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 0px 12px 12px 0px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: #0077B6;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .course-button:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            background-color: #f8f9fa;
+        }
+        
+        .course-button:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+        
+        .lecture-menu {
+            position: fixed;
+            left: 0px;
+            top: 33%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .menu-button {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 0px 12px 12px 0px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0077B6;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+        
+        .menu-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            background-color: #f8f9fa;
+        }
+        
+        .menu-button:active {
+            transform: scale(0.95);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 0;
+            left: 90px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #0077B6;
+        }
+        
+        .dropdown-item.active {
+            background-color: #0077B6;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas">
+        <!-- Slides container - content will be loaded here -->
+        <div id="slides-container"></div>
+        
+        <!-- Progress bar -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+                <div class="progress-scrubber" id="progressScrubber"></div>
+            </div>
+        </div>
+        
+        <!-- Slide counter -->
+        <div class="slide-counter" id="slideCounter">1 / 1</div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <span id="footerText">Blockchain Course</span>
+        </div>
+    </div>
+    
+    <!-- Course button (right side) -->
+    <button class="course-button" id="courseButton">
+        <img src="assets/logouit.png" alt="UIT Logo" style="width: 60px; height: auto; max-height: 60px; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='📋';">
+    </button>
+    
+    <!-- Lecture menu (left side) -->
+    <div class="lecture-menu">
+        <button class="menu-button" id="menuButton">
+            <img src="assets/icon.png" alt="Menu Icon" style="width: 60px; height: 60px; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='☰';">
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="javascript:void(0)" onclick="loadLecture(1)" class="dropdown-item" data-lecture="1">Buổi 1</a>
+            <a href="javascript:void(0)" onclick="loadLecture(2)" class="dropdown-item" data-lecture="2">Buổi 2</a>
+            <a href="javascript:void(0)" onclick="loadLecture(3)" class="dropdown-item" data-lecture="3">Buổi 3</a>
+            <a href="javascript:void(0)" onclick="loadLecture(4)" class="dropdown-item" data-lecture="4">Buổi 4</a>
+            <a href="javascript:void(0)" onclick="loadLecture(5)" class="dropdown-item" data-lecture="5">Buổi 5</a>
+            <a href="javascript:void(0)" onclick="loadLecture(6)" class="dropdown-item" data-lecture="6">Buổi 6</a>
+            <a href="javascript:void(0)" onclick="loadLecture(7)" class="dropdown-item" data-lecture="7">Buổi 7</a>
+        </div>
+    </div>
+
+    <script>
+        let slides = [];
+        let currentSlide = 0;
+        let currentLecture = 1;
+
+        // Lecture content data
+        const lectureData = {
+            1: {
+                title: "Blockchain Course - Buổi 1: Introduction to Blockchain",
+                footer: "UIT - Blockchain Course - Buổi 1",
+                contentFile: "content/lecture1.js"
+            },
+            2: {
+                title: "Blockchain Course - Buổi 2: Cryptographic Foundations", 
+                footer: "UIT - Blockchain Course - Buổi 2",
+                contentFile: "content/lecture2.js"
+            },
+            3: {
+                title: "Blockchain Course - Buổi 3: Bitcoin and Cryptocurrency",
+                footer: "UIT - Blockchain Course - Buổi 3", 
+                contentFile: "content/lecture3.js"
+            },
+            4: {
+                title: "Blockchain Course - Buổi 4: Ethereum and Smart Contracts",
+                footer: "UIT - Blockchain Course - Buổi 4",
+                contentFile: "content/lecture4.js"
+            },
+            5: {
+                title: "Blockchain Course - Buổi 5: Consensus Mechanisms",
+                footer: "UIT - Blockchain Course - Buổi 5",
+                contentFile: "content/lecture5.js"
+            },
+            6: {
+                title: "Blockchain Course - Buổi 6: Blockchain Applications",
+                footer: "UIT - Blockchain Course - Buổi 6",
+                contentFile: "content/lecture6.js"
+            },
+            7: {
+                title: "Blockchain Course - Buổi 7: Future of Blockchain",
+                footer: "UIT - Blockchain Course - Buổi 7",
+                contentFile: "content/lecture7.js"
+            }
+        };
+
+        async function loadLecture(lectureNumber) {
+            try {
+                currentLecture = lectureNumber;
+                const data = lectureData[lectureNumber];
+                
+                // Update page title and footer
+                document.getElementById('pageTitle').textContent = data.title;
+                document.getElementById('footerText').textContent = data.footer;
+                
+                // Clear current slides
+                document.getElementById('slides-container').innerHTML = '';
+                slides = [];
+                
+                // Load lecture content
+                const script = document.createElement('script');
+                script.src = data.contentFile;
+                script.onload = () => {
+                    // Content should be loaded by now
+                    initializeSlideshow();
+                    highlightCurrentLecture();
+                    
+                    // Close menu
+                    document.getElementById('dropdownMenu').classList.remove('show');
+                };
+                script.onerror = () => {
+                    console.error(`Failed to load ${data.contentFile}`);
+                    // Load fallback content
+                    loadFallbackContent(lectureNumber);
+                };
+                
+                // Remove previous script if exists
+                const existingScript = document.querySelector(`script[src*="lecture${currentLecture}"]`);
+                if (existingScript) {
+                    existingScript.remove();
+                }
+                
+                document.head.appendChild(script);
+                
+            } catch (error) {
+                console.error('Error loading lecture:', error);
+                loadFallbackContent(lectureNumber);
+            }
+        }
+
+        function loadFallbackContent(lectureNumber) {
+            const slidesContainer = document.getElementById('slides-container');
+            slidesContainer.innerHTML = `
+                <div class="slide active">
+                    <h2>Lecture ${lectureNumber}</h2>
+                    <div class="slide-content">
+                        <div class="center">
+                            <h3>Content Loading...</h3>
+                            <p>Please wait while we load the lecture content.</p>
+                            <p>If this message persists, the content file may be missing.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            initializeSlideshow();
+        }
+
+        function addSlide(slideHTML) {
+            const slidesContainer = document.getElementById('slides-container');
+            slidesContainer.insertAdjacentHTML('beforeend', slideHTML);
+        }
+
+        function initializeSlideshow() {
+            slides = document.querySelectorAll('.slide');
+            currentSlide = 0;
+            
+            if (slides.length > 0) {
+                showSlide(0);
+                setupProgressBar();
+                setupKeyboardNavigation();
+                updateCounter();
+            }
+        }
+
+        function showSlide(n) {
+            if (slides.length === 0) return;
+            
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            if (n >= slides.length) currentSlide = 0;
+            if (n < 0) currentSlide = slides.length - 1;
+            if (n >= 0 && n < slides.length) currentSlide = n;
+            
+            slides[currentSlide].classList.add('active');
+            updateProgressBar();
+            updateCounter();
+        }
+
+        function setupProgressBar() {
+            const progressContainer = document.getElementById('progressContainer');
+            const progressScrubber = document.getElementById('progressScrubber');
+            
+            if (!progressContainer || !progressScrubber) return;
+            
+            // Remove existing global event listeners
+            if (window.progressMouseMoveHandler) {
+                document.removeEventListener('mousemove', window.progressMouseMoveHandler);
+                document.removeEventListener('mouseup', window.progressMouseUpHandler);
+            }
+            
+            // Handle scrubber image
+            const scrubberImg = new Image();
+            scrubberImg.onload = function() {
+                progressScrubber.style.backgroundImage = "url('assets/scrubber.png')";
+                progressScrubber.style.backgroundSize = 'contain';
+                progressScrubber.style.backgroundRepeat = 'no-repeat';
+                progressScrubber.style.backgroundPosition = 'center';
+            };
+            scrubberImg.onerror = function() {
+                progressScrubber.setAttribute('data-no-image', 'true');
+            };
+            scrubberImg.src = 'assets/scrubber.png';
+            
+            // Remove existing event listeners by cloning and replacing
+            const newProgressContainer = progressContainer.cloneNode(true);
+            progressContainer.parentNode.replaceChild(newProgressContainer, progressContainer);
+            
+            const newProgressScrubber = document.getElementById('progressScrubber');
+            
+            // Progress bar click handler
+            newProgressContainer.addEventListener('click', (e) => {
+                if (e.target === newProgressScrubber) return;
+                
+                const rect = newProgressContainer.getBoundingClientRect();
+                const clickPosition = (e.clientX - rect.left) / rect.width;
+                const targetSlide = Math.round(clickPosition * (slides.length - 1));
+                showSlide(targetSlide);
+            });
+            
+            // Draggable scrubber
+            let isDragging = false;
+            
+            newProgressScrubber.addEventListener('mousedown', () => {
+                isDragging = true;
+                document.body.style.userSelect = 'none'; // Prevent text selection while dragging
+            });
+            
+            // Create new global listeners
+            window.progressMouseMoveHandler = (e) => {
+                if (!isDragging) return;
+                
+                const rect = newProgressContainer.getBoundingClientRect();
+                const position = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                const targetSlide = Math.round(position * (slides.length - 1));
+                showSlide(targetSlide);
+            };
+            
+            window.progressMouseUpHandler = () => {
+                isDragging = false;
+                document.body.style.userSelect = ''; // Restore text selection
+            };
+            
+            document.addEventListener('mousemove', window.progressMouseMoveHandler);
+            document.addEventListener('mouseup', window.progressMouseUpHandler);
+        }
+
+        function updateProgressBar() {
+            const progressFill = document.getElementById('progressFill');
+            const progressScrubber = document.getElementById('progressScrubber');
+            if (slides.length > 0) {
+                const progress = (currentSlide / (slides.length - 1)) * 100;
+                progressFill.style.width = progress + '%';
+                progressScrubber.style.left = progress + '%';
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        function updateCounter() {
+            const counterText = slides.length > 0 ? `${currentSlide + 1} / ${slides.length}` : '0 / 0';
+            document.getElementById('slideCounter').textContent = counterText;
+        }
+
+        function setupKeyboardNavigation() {
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+        }
+
+        function setupMenuNavigation() {
+            // Course button functionality
+            const courseButton = document.getElementById('courseButton');
+            courseButton.addEventListener('click', function() {
+                window.open('https://courses.uit.edu.vn/', '_blank');
+            });
+
+            // Lecture menu functionality
+            const menuButton = document.getElementById('menuButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            let isMenuOpen = false;
+
+            menuButton.addEventListener('click', function() {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    dropdownMenu.classList.add('show');
+                } else {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    isMenuOpen = false;
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+
+            // Close menu when pressing Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && isMenuOpen) {
+                    isMenuOpen = false;
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+        }
+
+        function highlightCurrentLecture() {
+            // Remove active class from all menu items
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to current lecture
+            const currentMenuItem = document.querySelector(`[data-lecture="${currentLecture}"]`);
+            if (currentMenuItem) {
+                currentMenuItem.classList.add('active');
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMenuNavigation();
+            loadLecture(1); // Load first lecture by default
+        });
+    </script>
+</body>
+</html>
