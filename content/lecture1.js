@@ -65,7 +65,7 @@ addSlide(`
     <h2>Thách thức lớn nhất: Bài toán Chi tiêu Kép (Double-Spending)</h2>
     <div class="slide-content">
         <p>Trong thế giới vật lý, bạn không thể đưa cho 2 người cùng một tờ tiền. Nhưng trong thế giới số, mọi thứ chỉ là dữ liệu. Dữ liệu có thể bị sao chép.</p>
-        <div class="center">
+        <div class="code-block">
             <code>File_Tien_Ky_Thuat_So.txt (10$) → Copy → File_Tien_Ky_Thuat_So(1).txt (10$)</code>
         </div>
         <p><strong>Làm thế nào để ngăn chặn một người dùng chi tiêu cùng một "đồng tiền số" nhiều lần trong một mạng lưới mà không có ai là người quản lý?</strong></p>
@@ -106,7 +106,7 @@ addSlide(`
             <li><strong>Tháng 01/2009:</strong> Khối đầu tiên (Genesis Block) được tạo ra, khởi chạy mạng lưới.</li>
             <li>Trong khối này, Satoshi đã nhúng một thông điệp mang tính biểu tượng:</li>
         </ul>
-        <div class="center">
+        <div class="quote-block">
             <blockquote>"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"</blockquote>
         </div>
         <p>Đây là lời tuyên bố về mục đích của Bitcoin: tạo ra một hệ thống độc lập với tài chính truyền thống.</p>
@@ -255,7 +255,7 @@ addSlide(`
     <h2>Thành phần Blockchain (4/6): Tạo thành "Chuỗi"</h2>
     <div class="slide-content">
         <p>Đây chính là phần "Chain" trong "Blockchain". Các khối được liên kết với nhau một cách chặt chẽ bằng mật mã học.</p>
-        <div class="center">
+        <div class="code-block">
             <code>[Block N-1] --hash(N-1)→ [Block N] --hash(N)→ [Block N+1]</code>
         </div>
         <ul>
@@ -271,7 +271,7 @@ addSlide(`
     <h2>Thành phần Blockchain (5/6): Tính Bất biến (Immutability)</h2>
     <div class="slide-content">
         <p>Tại sao việc thay đổi dữ liệu trên Blockchain lại khó đến vậy?</p>
-        <div class="center">
+        <div class="highlight-box">
             <p><strong>Ai đó sửa dữ liệu trong Block N-1</strong><br>
             ↓<br>
             <strong>Hash của Block N-1 thay đổi</strong><br>
@@ -388,7 +388,7 @@ addSlide(`
             <li>Mật mã hóa khóa công khai</li>
             <li>Chữ ký số</li>
         </ul>
-        <div class="center" style="margin-top: 30px;">
+        <div class="highlight-box" style="margin-top: 30px; font-size: 2.5em;">
             <h4 style="color: #0077B6;">Câu hỏi & Thảo luận?</h4>
         </div>
     </div>

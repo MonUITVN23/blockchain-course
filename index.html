@@ -249,6 +249,114 @@
             border-radius: 8px;
             margin-top: 20px;
         }
+        
+        /* Code block styling */
+        .code-block {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background: linear-gradient(135deg, #f8faff 0%, #f8faff 100%);
+            color: #070707;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 25px auto;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(30, 60, 114, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            max-width: 85%;
+            font-size: 1.2em;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+        
+        .code-block::before {
+            content: '</>';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 0.8em;
+            color: #272727;
+            opacity: 0.7;
+        }
+        
+        /* Quote styling */
+        .quote-block {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #fafbff 0%, #fdfaff 100%);
+            color: rgb(31, 31, 31);
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin: 25px auto;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            border-left: 5px solid #818181;
+            position: relative;
+            max-width: 80%;
+            font-size: 1.3em;
+            line-height: 1.7;
+            font-style: italic;
+        }
+        
+        .quote-block::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-size: 4em;
+            color: #818181;
+            opacity: 0.7;
+            line-height: 1;
+        }
+        
+        .quote-block::after {
+            content: '"';
+            position: absolute;
+            bottom: -25px;
+            right: 15px;
+            font-size: 4em;
+            color: #818181;
+            opacity: 0.7;
+            line-height: 1;
+        }
+        
+        /* Command/Terminal styling */
+        .command-block {
+            font-family: 'Courier New', 'Consolas', monospace;
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin: 25px auto;
+            text-align: left;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid #333;
+            position: relative;
+            max-width: 90%;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+        
+        .command-block::before {
+            content: '$ ';
+            color: #ffff00;
+            font-weight: bold;
+        }
+        
+        /* Highlight box for important text */
+        .highlight-box {
+            background: linear-gradient(135deg, #e2efff 0%, #e2efff 50%, #e2efff 100%);
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 12px;
+            margin: 10px auto;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(255, 154, 158, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            max-width: 85%;
+            font-size: 1em;
+            font-weight: 600;
+            line-height: 1.6;
+        }
         .footer { position: absolute; bottom: 20px; left: 60px; font-size: 1em; color: #777; }
         .slide-counter { position: absolute; bottom: 20px; right: 60px; font-size: 0.9em; font-weight: bold; color: #0077B6; }
         
@@ -494,13 +602,13 @@
             <img src="assets/icon.png" alt="Menu Icon" style="width: 60px; height: 60px; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='☰';">
         </button>
         <div class="dropdown-menu" id="dropdownMenu">
-            <a href="javascript:void(0)" onclick="loadLecture(1)" class="dropdown-item" data-lecture="1">Buổi 1</a>
-            <a href="javascript:void(0)" onclick="loadLecture(2)" class="dropdown-item" data-lecture="2">Buổi 2</a>
-            <a href="javascript:void(0)" onclick="loadLecture(3)" class="dropdown-item" data-lecture="3">Buổi 3</a>
-            <a href="javascript:void(0)" onclick="loadLecture(4)" class="dropdown-item" data-lecture="4">Buổi 4</a>
-            <a href="javascript:void(0)" onclick="loadLecture(5)" class="dropdown-item" data-lecture="5">Buổi 5</a>
-            <a href="javascript:void(0)" onclick="loadLecture(6)" class="dropdown-item" data-lecture="6">Buổi 6</a>
-            <a href="javascript:void(0)" onclick="loadLecture(7)" class="dropdown-item" data-lecture="7">Buổi 7</a>
+            <a href="javascript:void(0)" class="dropdown-item" data-lecture="1">Buổi 1</a>
+            <a href="javascript:void(0)" class="dropdown-item" data-lecture="2">Buổi 2</a>
+            <a href="javascript:void(0)" class="dropdown-item" data-lecture="3">Buổi 3</a>
+            <a href="javascript:void(0)" class="dropdown-item" data-lecture="4">Buổi 4</a>
+            <a href="javascript:void(0)" class="dropdown-item" data-lecture="5">Buổi 5</a>
+            <a href="javascript:void(0)" class="dropdown-item" data-lecture="6">Buổi 6</a>
+            <a href="javascript:void(0)" class="dropdown-item" data-lecture="7">Buổi 7</a>
         </div>
     </div>
 
@@ -622,6 +730,7 @@
                 showSlide(0);
                 setupProgressBar();
                 setupKeyboardNavigation();
+                setupMenuNavigation(); // Refresh menu navigation handlers
                 updateCounter();
             }
         }
@@ -738,51 +847,103 @@
         }
 
         function setupKeyboardNavigation() {
-            document.addEventListener('keydown', (e) => {
+            // Remove existing keyboard navigation listener if it exists
+            if (window.keyboardNavigationHandler) {
+                document.removeEventListener('keydown', window.keyboardNavigationHandler);
+            }
+            
+            // Create new keyboard navigation handler
+            window.keyboardNavigationHandler = (e) => {
                 if(e.key === 'ArrowRight') {
                     nextSlide();
                 } else if (e.key === 'ArrowLeft') {
                     prevSlide();
                 }
-            });
+            };
+            
+            // Add the new event listener
+            document.addEventListener('keydown', window.keyboardNavigationHandler);
         }
 
         function setupMenuNavigation() {
             // Course button functionality
             const courseButton = document.getElementById('courseButton');
-            courseButton.addEventListener('click', function() {
+            
+            // Remove existing course button listener if it exists
+            if (window.courseButtonHandler) {
+                courseButton.removeEventListener('click', window.courseButtonHandler);
+            }
+            
+            // Create new course button handler
+            window.courseButtonHandler = function() {
                 window.open('https://courses.uit.edu.vn/', '_blank');
-            });
+            };
+            courseButton.addEventListener('click', window.courseButtonHandler);
 
             // Lecture menu functionality
             const menuButton = document.getElementById('menuButton');
             const dropdownMenu = document.getElementById('dropdownMenu');
+            
+            // Remove existing menu listeners if they exist
+            if (window.menuButtonHandler) {
+                menuButton.removeEventListener('click', window.menuButtonHandler);
+            }
+            if (window.documentClickHandler) {
+                document.removeEventListener('click', window.documentClickHandler);
+            }
+            if (window.escapeKeyHandler) {
+                document.removeEventListener('keydown', window.escapeKeyHandler);
+            }
+            
+            // Remove existing dropdown item listeners
+            if (window.dropdownItemHandlers) {
+                window.dropdownItemHandlers.forEach((handler, element) => {
+                    element.removeEventListener('click', handler);
+                });
+            }
+            window.dropdownItemHandlers = new Map();
+            
             let isMenuOpen = false;
 
-            menuButton.addEventListener('click', function() {
+            // Create new menu button handler
+            window.menuButtonHandler = function() {
                 isMenuOpen = !isMenuOpen;
                 if (isMenuOpen) {
                     dropdownMenu.classList.add('show');
                 } else {
                     dropdownMenu.classList.remove('show');
                 }
+            };
+            menuButton.addEventListener('click', window.menuButtonHandler);
+
+            // Setup dropdown item listeners
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                const lectureNumber = parseInt(item.getAttribute('data-lecture'));
+                const handler = function(e) {
+                    e.preventDefault();
+                    loadLecture(lectureNumber);
+                };
+                item.addEventListener('click', handler);
+                window.dropdownItemHandlers.set(item, handler);
             });
 
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
+            // Create new document click handler
+            window.documentClickHandler = function(event) {
                 if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
                     isMenuOpen = false;
                     dropdownMenu.classList.remove('show');
                 }
-            });
+            };
+            document.addEventListener('click', window.documentClickHandler);
 
-            // Close menu when pressing Escape key
-            document.addEventListener('keydown', function(event) {
+            // Create new escape key handler
+            window.escapeKeyHandler = function(event) {
                 if (event.key === 'Escape' && isMenuOpen) {
                     isMenuOpen = false;
                     dropdownMenu.classList.remove('show');
                 }
-            });
+            };
+            document.addEventListener('keydown', window.escapeKeyHandler);
         }
 
         function highlightCurrentLecture() {
