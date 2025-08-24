@@ -1,0 +1,22 @@
+# Ignore slide_raw folder
+slide_raw/
+
+# Common OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Node modules (if any)
+node_modules/
+
+# Build outputs
+dist/
+build/
