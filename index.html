@@ -677,6 +677,9 @@
                     initializeSlideshow();
                     highlightCurrentLecture();
                     
+                    // Setup animation buttons for any animations in the loaded lecture
+                    window.setupAnimationButtons();
+                    
                     // Close menu
                     document.getElementById('dropdownMenu').classList.remove('show');
                 };
@@ -964,6 +967,165 @@
             setupMenuNavigation();
             loadLecture(1); // Load first lecture by default
         });
+
+        // ========================================
+        // UNIVERSAL ANIMATION SYSTEM
+        // ========================================
+        
+        // Animation registry to store different animation configs
+        window.animationConfigs = {};
+        
+        // Register an animation configuration
+        window.registerAnimation = function(animationId, config) {
+            window.animationConfigs[animationId] = config;
+            console.log(`Animation registered: ${animationId}`);
+        };
+        
+        // Main animation player function
+        window.playAnimation = function(animationId) {
+            const config = window.animationConfigs[animationId];
+            if (!config) {
+                console.error(`Animation config not found: ${animationId}`);
+                return;
+            }
+            
+            if (config.isActive) {
+                console.log(`Animation ${animationId} is already running`);
+                return;
+            }
+            
+            console.log(`Starting animation: ${animationId}`);
+            config.isActive = true;
+            
+            // Update button state
+            const button = document.getElementById(config.playButtonId);
+            if (button) {
+                button.disabled = true;
+                button.innerHTML = config.runningText || '🎬 Đang chạy...';
+            }
+            
+            // Reset animation first
+            window.resetAnimation(animationId);
+            
+            // Execute animation steps
+            config.steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.execute();
+                    console.log(`${animationId} - Step ${index + 1} executed`);
+                    
+                    // If this is the last step, finish animation
+                    if (index === config.steps.length - 1) {
+                        setTimeout(() => {
+                            window.finishAnimation(animationId);
+                        }, step.additionalDelay || 0);
+                    }
+                }, step.delay);
+            });
+        };
+        
+        // Reset animation to initial state
+        window.resetAnimation = function(animationId) {
+            const config = window.animationConfigs[animationId];
+            if (!config) return;
+            
+            console.log(`Resetting animation: ${animationId}`);
+            
+            // Execute reset function if provided
+            if (config.reset) {
+                config.reset();
+            }
+            
+            // Reset button state
+            const button = document.getElementById(config.playButtonId);
+            if (button) {
+                button.disabled = false;
+                button.innerHTML = config.playText || '▶️ Chạy Animation';
+            }
+            
+            config.isActive = false;
+        };
+        
+        // Finish animation
+        window.finishAnimation = function(animationId) {
+            const config = window.animationConfigs[animationId];
+            if (!config) return;
+            
+            console.log(`Finishing animation: ${animationId}`);
+            
+            // Execute finish function if provided
+            if (config.finish) {
+                config.finish();
+            }
+            
+            // Update button for replay
+            const button = document.getElementById(config.playButtonId);
+            if (button) {
+                button.disabled = false;
+                button.innerHTML = config.replayText || '▶️ Chạy lại Animation';
+            }
+            
+            config.isActive = false;
+        };
+        
+        // Setup animation buttons (call this after slides are loaded)
+        window.setupAnimationButtons = function() {
+            setTimeout(() => {
+                Object.keys(window.animationConfigs).forEach(animationId => {
+                    const config = window.animationConfigs[animationId];
+                    
+                    // Setup play button
+                    const playButton = document.getElementById(config.playButtonId);
+                    if (playButton) {
+                        playButton.removeEventListener('click', config.playHandler); // Remove old listener
+                        config.playHandler = () => window.playAnimation(animationId);
+                        playButton.addEventListener('click', config.playHandler);
+                        console.log(`Play button setup for: ${animationId}`);
+                    }
+                    
+                    // Setup reset button if exists
+                    if (config.resetButtonId) {
+                        const resetButton = document.getElementById(config.resetButtonId);
+                        if (resetButton) {
+                            resetButton.removeEventListener('click', config.resetHandler); // Remove old listener
+                            config.resetHandler = () => window.resetAnimation(animationId);
+                            resetButton.addEventListener('click', config.resetHandler);
+                            console.log(`Reset button setup for: ${animationId}`);
+                        }
+                    }
+                });
+            }, 1000); // Wait for DOM to be ready
+        };
+        
+        // Animation utility functions
+        window.animateElement = function(elementId, properties, duration = 800) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            Object.keys(properties).forEach(prop => {
+                element.style.transition = `${prop} ${duration}ms ease-in-out`;
+                element.style[prop] = properties[prop];
+            });
+        };
+        
+        window.typeText = function(elementId, targetText, speed = 100) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            let currentText = '';
+            let index = 0;
+            
+            const typeInterval = setInterval(() => {
+                if (index < targetText.length) {
+                    currentText += targetText[index];
+                    element.textContent = currentText + '...';
+                    index++;
+                } else {
+                    element.textContent = targetText;
+                    clearInterval(typeInterval);
+                }
+            }, speed);
+        };
+
     </script>
 </body>
 </html>

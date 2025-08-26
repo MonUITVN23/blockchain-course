@@ -27,6 +27,3 @@ addSlide(`
     </div>
 </div>
 `);
-
-// Initialize the slideshow after loading all slides
-startSlideshow();
