@@ -35,8 +35,8 @@ addSlide(`
     <h2>Ôn lại Buổi 1 & Dẫn nhập</h2>
     <div class="slide-content">
         <p>Buổi trước, chúng ta đã đặt câu hỏi: "Làm sao để xây dựng <strong>niềm tin</strong> trong một hệ thống không có người lãnh đạo?"</p>
-        
-        <div class="highlight-box">
+
+        <div class="highlight-box" style="font-size: 1.5em;">
             Câu trả lời là: <strong>Cryptography (Mật mã học)</strong>
         </div>
         
@@ -47,7 +47,7 @@ addSlide(`
 
 addSlide(`
 <div class="slide">
-    <h2>Phần I: Hàm băm - "Vân tay" của Dữ liệu 👆</h2>
+    <h2>Phần I: Hàm băm - "Vân tay" của Dữ liệu</h2>
     <div class="slide-content">
         <p>Hãy tưởng tượng hàm băm như một chiếc máy xay ma thuật:</p>
         <ul>
@@ -89,7 +89,7 @@ addSlide(`
             <li><code>hash("Syllabus")</code> hôm nay hay 10 năm sau vẫn cho ra cùng một chuỗi hash.</li>
         </ul>
         
-        <div class="highlight-box">
+        <div class="highlight-box" style="font-size: 1.3em; text-align: left; margin-top: 30px;">
             <strong>Tại sao quan trọng?:</strong> Cho phép mọi người trong mạng lưới có thể tự mình kiểm tra và xác minh tính hợp lệ của dữ liệu. Nếu tôi và bạn cùng băm một khối và ra kết quả giống nhau, chúng ta biết rằng chúng ta có cùng một dữ liệu.
         </div>
     </div>
@@ -106,7 +106,7 @@ addSlide(`
             <li>Nhưng gần như <strong>không thể</strong> tìm ra <code>X</code> nếu chỉ biết <code>Y</code>.</li>
         </ul>
         
-        <div class="highlight-box">
+        <div class="highlight-box" style="font-size: 1.3em; text-align: left; margin-top: 30px;">
             <strong>Tại sao quan trọng?:</strong> Giúp bảo vệ dữ liệu. Ví dụ, Merkle Root tóm tắt hàng ngàn giao dịch, nhưng không ai có thể từ Merkle Root mà suy ngược ra được nội dung của các giao dịch đó.
         </div>
     </div>
@@ -123,7 +123,7 @@ addSlide(`
             <li>Với SHA-256, xác suất này nhỏ hơn cả việc trúng số độc đắc nhiều lần liên tiếp.</li>
         </ul>
         
-        <div class="highlight-box">
+        <div class="highlight-box" style="font-size: 1.3em; text-align: left; margin-top: 30px;">
             <strong>Tại sao quan trọng?:</strong> Đảm bảo tính toàn vẹn của chuỗi. Nếu có thể tạo ra va chạm, kẻ gian có thể tạo ra một khối giả mạo có cùng hash với khối thật để lừa đảo hệ thống.
         </div>
     </div>
@@ -152,7 +152,7 @@ addSlide(`
 
 addSlide(`
 <div class="slide">
-    <h2>Phần II: Mật mã Khóa công khai - Danh tính Số của bạn 🆔</h2>
+    <h2>Phần II: Mật mã Khóa công khai - Danh tính Số của bạn</h2>
     <div class="slide-content">
         <p>Hệ thống này giải quyết một vấn đề kinh điển: Làm sao để <strong>giao tiếp an toàn</strong> và <strong>xác định danh tính</strong> trên một mạng lưới công cộng và không tin cậy?</p>
         
@@ -202,7 +202,7 @@ addSlide(`
     <div class="slide-content">
         <p>Trong thế giới Blockchain, có một câu thần chú:</p>
         
-        <div class="highlight-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); color: #856404;">
+        <div class="quote-block" style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); color: #856404;">
             "Not Your Keys, Not Your Coins"<br>
             (Không phải khóa của bạn, không phải tiền của bạn)
         </div>
@@ -217,7 +217,7 @@ addSlide(`
 
 addSlide(`
 <div class="slide">
-    <h2>Phần III: Chữ ký số - Dấu ấn Không thể Chối cãi ✍️</h2>
+    <h2>Phần III: Chữ ký số - Dấu ấn Không thể Chối cãi</h2>
     <div class="slide-content">
         <p>Làm sao mạng lưới biết một giao dịch là hợp lệ và thực sự đến từ bạn?</p>
         
@@ -232,13 +232,13 @@ addSlide(`
 
 addSlide(`
 <div class="slide">
-    <h2>🔐 Animation: Quy trình Ký một Giao dịch (WebCrypto)</h2>
+    <h2>Quy trình Ký một Giao dịch</h2>
     <div class="slide-content">
-        <p style="margin-bottom: 15px;">Các bước: Tạo <strong>Tx</strong> → <strong>Hash(Tx)</strong> → Ký bằng <strong>Private Key</strong> → Đóng gói &amp; truyền đi</p>
+        <p style="margin-bottom: 15px;">Các bước mà Alice sẽ thực hiện để gửi gói tin cho Bob: Tạo <strong>Tx</strong> → <strong>Hash(Tx)</strong> → Ký bằng <strong>Private Key</strong> → Đóng gói &amp; truyền đi</p>
         
         <div style="display: flex; gap: 8px; margin: 10px 0; align-items: center;">
             <button id="crypto-play" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: bold;">
-                ▶️ Chạy Animation
+                ▶️ Chạy
             </button>
             <button id="crypto-reset" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: bold;" disabled>
                 ⟲ Reset
@@ -342,7 +342,10 @@ addSlide(`
             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border-radius: 16px; padding: 24px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 2px solid #e9ecef; padding-bottom: 12px;">
                     <h3 style="margin: 0; color: #2e7d32; font-size: 18px;">📦 Chi tiết Gói tin Hoàn chỉnh</h3>
-                    <button id="close-modal" style="background: #dc3545; color: white; border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 14px; font-weight: bold;">✕ Đóng</button>
+                    <div style="display: flex; gap: 8px;">
+                        <button id="copy-package-btn" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 14px; font-weight: bold;">Copy Package</button>
+                        <button id="close-modal" style="background: #dc3545; color: white; border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 14px; font-weight: bold;">✕ Đóng</button>
+                    </div>
                 </div>
                 
                 <div style="background: #f8f9fa; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
@@ -376,24 +379,76 @@ addSlide(`
 </div>
 `);
 
+// ============ VERIFIER SLIDE ============
 addSlide(`
 <div class="slide">
-    <h2>Quy trình Xác minh Chữ ký</h2>
+    <h2>Quy trình Xác minh Chữ ký số</h2>
     <div class="slide-content">
-        <p>Một node trong mạng nhận được gói tin của Alice. Nó sẽ làm gì?</p>
+        <p>Sau khi Alice ký giao dịch, bây giờ Bob (hoặc bất kỳ ai) có thể <strong>xác minh</strong> tính hợp lệ của gói tin:</p>
         
-        <div class="code-block">
-            1. Node tách gói tin ra.<br><br>
+        <!-- ========== VERIFIER VIEW ========== -->
+        <section id="viewVerify" class="view">
+            <p class="small">Node sẽ xử lý gói <code>[Tx, AlicePublicKey, Signature]</code> từ Signer để xác minh và gửi lên mạng Blockchain.</p>
             
-            2. Node tự tính lại hash của dữ liệu Tx gốc.<br>
-            <strong>Hash(Tx)</strong> → <strong>a1b2c3d4...</strong> (Kết quả A)<br><br>
+            <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+                <button id="loadFromStorage" style="background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold;">
+                    📥 Load từ bộ nhớ
+                </button>
+                <button id="verifyRun" style="background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%); color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold;">
+                    ✔ Verify
+                </button>
+                <button id="verifyReset" style="background: #6c757d; color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold;" disabled>
+                    ⟲ Reset
+                </button>
+                <span style="margin-left: auto; color: #6c757d; font-size: 14px; align-self: center;" id="statusV">Idle.</span>
+            </div>
 
-            3. Node dùng Khóa công khai của Alice để giải mã chữ ký.<br>
-            <strong>Verify(Signature_XYZ, Alice's Public Key)</strong> → <strong>a1b2c3d4...</strong> (Kết quả B)<br><br>
+            <!-- Input Package -->
+            <div style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                <div style="font-size: 12px; color: #6c757d; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase; font-weight: bold;">
+                    Gói tin đầu vào cho Verifier
+                </div>
+                <textarea id="pkgInput" style="width: 100%; height: 80px; padding: 12px; border: 1px solid #ced4da; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; resize: vertical; box-sizing: border-box;" placeholder='Dán JSON package ở đây (từ slide trước)…'></textarea>
+            </div>
 
-            4. So sánh hai kết quả.<br>
-            <strong>Is (Kết quả A == Kết quả B)?</strong> → <strong>TRUE!</strong> => Giao dịch HỢP LỆ.
-        </div>
+            <!-- Verification Steps Grid -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+                <!-- Step 1: Split Package -->
+                <div id="v1" style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 16px; transition: all 0.3s ease;">
+                    <div style="font-size: 12px; color: #6c757d; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase; font-weight: bold;">
+                        Bước 1 · Tách gói tin
+                    </div>
+                    <pre id="vSplit" style="margin: 0; font-size: 11px; line-height: 1.3; background: #ffffff; border: 1px solid #dee2e6; padding: 12px; border-radius: 8px; color: #495057; height: 120px; overflow: auto;"><code>// …</code></pre>
+                </div>
+
+                <!-- Step 2: Hash Transaction -->
+                <div id="v2" style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 16px; transition: all 0.3s ease;">
+                    <div style="font-size: 12px; color: #6c757d; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase; font-weight: bold;">
+                        Bước 2 · Hash(Tx) lại
+                    </div>
+                    <div style="text-align: center; margin-bottom: 8px;">
+                        <div id="machine-status-v" style="font-size: 10px; color: #28a745; font-weight: bold;">Máy băm đang chờ…</div>
+                    </div>
+                    <pre id="vHash" style="margin: 0; font-size: 11px; line-height: 1.3; background: #ffffff; border: 1px solid #dee2e6; padding: 12px; border-radius: 8px; color: #495057; height: 80px; overflow: auto;"><code>// …</code></pre>
+                </div>
+
+                <!-- Step 3: Verify Signature -->
+                <div id="v3" style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 16px; transition: all 0.3s ease;">
+                    <div style="font-size: 12px; color: #6c757d; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase; font-weight: bold;">
+                        Bước 3 · Verify Signature
+                    </div>
+                    <pre id="vVerify" style="margin: 0; font-size: 11px; line-height: 1.3; background: #ffffff; border: 1px solid #dee2e6; padding: 12px; border-radius: 8px; color: #495057; height: 120px; overflow: auto;"><code>// …</code></pre>
+                </div>
+
+                <!-- Step 4: Compare Results -->
+                <div id="v4" style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 16px; transition: all 0.3s ease;">
+                    <div style="font-size: 12px; color: #6c757d; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase; font-weight: bold;">
+                        Bước 4 · So sánh A ≟ B
+                    </div>
+                    <pre id="vCompare" style="margin: 0; font-size: 11px; line-height: 1.3; background: #ffffff; border: 1px solid #dee2e6; padding: 12px; border-radius: 8px; color: #495057; height: 100px; overflow: auto;"><code>// …</code></pre>
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 `);
@@ -438,7 +493,7 @@ addSlide(`
 
 addSlide(`
 <div class="slide">
-    <h2>Phần IV: Cây Merkle - Tối ưu hóa Hiệu suất 🌳</h2>
+    <h2>Phần IV: Cây Merkle - Tối ưu hóa Hiệu suất</h2>
     <div class="slide-content">
         <p>Một khối có thể chứa hàng ngàn giao dịch. Làm sao một ví điện thoại (light client) có thể xác minh giao dịch của mình mà không cần tải về cả khối (hàng Megabyte dữ liệu)?</p>
         
@@ -449,22 +504,46 @@ addSlide(`
 
 addSlide(`
 <div class="slide">
-    <h2>Xây dựng Cây Merkle</h2>
+    <h2>Xây dựng Cây Merkle - Animation</h2>
     <div class="slide-content">
         <p>Quá trình này diễn ra từ dưới lên trên, bằng cách băm liên tục các cặp hash.</p>
         
-        <div class="code-block">
-            // Hash Gốc (Merkle Root) - Được lưu trong Tiêu đề khối<br>
-            <strong>H_ABCD</strong><br>
-            ↑<br>
-            <strong>Hash(H_AB + H_CD)</strong><br>
-            /&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\\<br>
-            <strong>H_AB</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>H_CD</strong><br>
-            ↑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑<br>
-            <strong>Hash(HA+HB)</strong>&nbsp;&nbsp;<strong>Hash(HC+HD)</strong><br>
-            /&nbsp;\\&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;\\<br>
-            <strong>HA, HB, HC, HD</strong><br>
-            // Hash của các giao dịch ở tầng lá
+        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+            <button id="merkle-play" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: bold;">
+                ▶ Xây dựng Cây
+            </button>
+            <button id="merkle-reset" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: bold;" disabled>
+                ⟲ Reset
+            </button>
+            <span style="margin-left: auto; color: #6c757d; font-size: 14px; align-self: center;" id="merkle-status">Sẵn sàng xây dựng cây.</span>
+        </div>
+
+        <div style="width: 100%; height: 345px; background: #0f1220; border: 2px solid #23284b; border-radius: 16px; position: relative; display: flex; align-items: center; justify-content: center;">
+            <svg id="merkle-svg" viewBox="0 0 640 350" style="width: 100%; height: 100%;">
+                <defs>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" result="b"/>
+                        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+            </svg>
+        </div>
+        
+        <div style="margin-top: 16px; background: #f8f9fa; border-radius: 12px; padding: 16px;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 12px;">
+                <div style="text-align: center;">
+                    <div style="width: 20px; height: 20px; background: #ef4444; border-radius: 50%; margin: 0 auto 4px; border: 2px solid #dc2626;"></div>
+                    <div><strong>Lá (Leaves)</strong><br>Dữ liệu gốc</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 20px; height: 20px; background: #60a5fa; border-radius: 50%; margin: 0 auto 4px; border: 2px solid #3b82f6;"></div>
+                    <div><strong>Nút trung gian</strong><br>Hash của cặp con</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 20px; height: 20px; background: #f59e0b; border-radius: 50%; margin: 0 auto 4px; border: 2px solid #d97706;"></div>
+                    <div><strong>Merkle Root</strong><br>Hash gốc</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -481,7 +560,7 @@ addSlide(`
             <li><strong>Merkle Root</strong> (để so sánh kết quả cuối cùng)</li>
         </ul>
         
-        <div class="highlight-box">
+        <div class="highlight-box" style="font-size: 1.3em; text-align: left; margin-top: 30px;">
             → Một lượng dữ liệu cực nhỏ để xác minh, giúp các thiết bị yếu có thể tương tác an toàn với Blockchain.
         </div>
     </div>
@@ -492,13 +571,13 @@ addSlide(`
 <div class="slide">
     <h2>Tổng hợp: Vòng đời của một Giao dịch</h2>
     <div class="slide-content">
-        <p>Hãy xem cả 4 thành phần hoạt động cùng nhau như thế nào:</p>
-        <ol style="font-size: 1.2em; line-height: 1.8;">
+        <p style="font-size: 1.8em;">Hãy xem cả 4 thành phần hoạt động cùng nhau như thế nào:</p>
+        <ul style="font-size: 1em; line-height: 1.8;">
             <li>Alice dùng <strong>Khóa Riêng tư</strong> để tạo <strong>Chữ ký số</strong> cho giao dịch.</li>
             <li>Giao dịch được đưa vào một khối cùng hàng ngàn giao dịch khác.</li>
             <li>Tất cả được <strong>Băm</strong> và sắp xếp vào một <strong>Cây Merkle</strong> để tạo ra Merkle Root.</li>
             <li>Khối được liên kết vào chuỗi bằng cách đưa <strong>Hash</strong> của khối trước vào tiêu đề.</li>
-        </ol>
+        </ul>
     </div>
 </div>
 `);
@@ -659,7 +738,7 @@ function initializeCryptoAnimation() {
                     resultBtn.style.boxShadow = '0 4px 12px rgba(40, 167, 69, 0.3)';
                     
                     // Update status text
-                    statusText.innerHTML = '<span style="color: #28a745; font-weight: bold;">✅ Sẵn sàng xem kết quả!</span>';
+                    statusText.innerHTML = '<span style="color: #28a745; font-weight: bold;">Lấy kết quả để xác minh tại slide sau!</span>';
                     
                     // Store package data for modal
                     window.cryptoPackageData = pkg;
@@ -738,6 +817,38 @@ function initializeCryptoAnimation() {
                 if (closeBtn) {
                     closeBtn.onclick = function() {
                         modal.style.display = 'none';
+                    };
+                }
+                
+                // Add copy package functionality
+                const copyBtn = document.getElementById('copy-package-btn');
+                if (copyBtn) {
+                    copyBtn.onclick = async function() {
+                        try {
+                            const packageText = json(pkg);
+                            await navigator.clipboard.writeText(packageText);
+                            
+                            // Visual feedback
+                            const originalText = copyBtn.innerHTML;
+                            copyBtn.innerHTML = '✅ Đã Copy!';
+                            copyBtn.style.background = '#28a745';
+                            
+                            setTimeout(() => {
+                                copyBtn.innerHTML = originalText;
+                                copyBtn.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                            }, 2000);
+                            
+                        } catch (error) {
+                            console.error('Copy failed:', error);
+                            const originalText = copyBtn.innerHTML;
+                            copyBtn.innerHTML = '❌ Lỗi Copy';
+                            copyBtn.style.background = '#dc3545';
+                            
+                            setTimeout(() => {
+                                copyBtn.innerHTML = originalText;
+                                copyBtn.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                            }, 2000);
+                        }
                     };
                 }
                 
@@ -837,3 +948,423 @@ const cryptoChecker = setInterval(() => {
         clearInterval(cryptoChecker);
     }
 }, 1000);
+
+// ============ VERIFIER ANIMATION JAVASCRIPT ============
+function initializeVerifierAnimation() {
+    const loadBtn = document.getElementById('loadFromStorage');
+    const verifyBtn = document.getElementById('verifyRun');
+    const resetBtn = document.getElementById('verifyReset');
+    const statusEl = document.getElementById('statusV');
+    const pkgInput = document.getElementById('pkgInput');
+    
+    if (!loadBtn || !verifyBtn || !resetBtn || !statusEl || !pkgInput) {
+        console.log('⏳ Verifier animation elements not found, will retry...');
+        return;
+    }
+    
+    console.log('✅ Verifier animation elements found, initializing...');
+    
+    let busy = false;
+    
+    // Helper functions
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    const enc = (s) => new TextEncoder().encode(s);
+    const toHex = (buf) => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+    const b64urlDecode = (str) => {
+        str = str.replace(/-/g, '+').replace(/_/g, '/');
+        while (str.length % 4) str += '=';
+        return Uint8Array.from(atob(str), c => c.charCodeAt(0));
+    };
+    const json = (obj) => JSON.stringify(obj, null, 2);
+    
+    function highlightCard(id) {
+        document.getElementById(id).style.border = '2px solid #007bff';
+        document.getElementById(id).style.boxShadow = '0 0 10px rgba(0,123,255,0.3)';
+    }
+    
+    function clearHighlight(id) {
+        document.getElementById(id).style.border = '2px solid #e9ecef';
+        document.getElementById(id).style.boxShadow = 'none';
+    }
+    
+    function stableStringify(obj) {
+        if (obj === null || typeof obj !== 'object') return JSON.stringify(obj);
+        if (Array.isArray(obj)) return '[' + obj.map(stableStringify).join(',') + ']';
+        return '{' + Object.keys(obj).sort().map(k => JSON.stringify(k) + ':' + stableStringify(obj[k])).join(',') + '}';
+    }
+    
+    async function runVerification() {
+        if (busy) return;
+        busy = true;
+        verifyBtn.disabled = true;
+        resetBtn.disabled = false;
+        
+        try {
+            statusEl.textContent = 'Đang xác minh...';
+            
+            // Parse input package
+            const pkgText = pkgInput.value.trim();
+            if (!pkgText) {
+                throw new Error('Vui lòng nhập gói tin cần xác minh');
+            }
+            
+            let pkg;
+            try {
+                pkg = JSON.parse(pkgText);
+            } catch {
+                throw new Error('Gói tin không đúng định dạng JSON');
+            }
+            
+            if (!pkg.tx || !pkg.alicePublicKey || !pkg.signature) {
+                throw new Error('Gói tin thiếu thông tin: cần có tx, alicePublicKey, signature');
+            }
+            
+            // STEP 1: Split package
+            highlightCard('v1');
+            document.getElementById('vSplit').innerHTML = `<div style="color: #007bff; font-weight: bold; margin-bottom: 8px;">📦 Gói tin được tách thành:</div>
+<div style="color: #28a745; font-size: 10px; margin-bottom: 4px;"><strong>• Transaction:</strong></div>
+<div style="font-size: 9px; color: #495057; margin-bottom: 8px;">${json(pkg.tx)}</div>
+<div style="color: #28a745; font-size: 10px; margin-bottom: 4px;"><strong>• Public Key:</strong></div>
+<div style="font-size: 9px; color: #495057; margin-bottom: 8px;">${JSON.stringify(pkg.alicePublicKey, null, 1)}</div>
+<div style="color: #28a745; font-size: 10px;"><strong>• Signature:</strong></div>
+<div style="font-size: 9px; color: #495057;">${pkg.signature.slice(0, 40)}...</div>`;
+            await sleep(1500);
+            
+            // STEP 2: Hash transaction again
+            clearHighlight('v1');
+            highlightCard('v2');
+            document.getElementById('machine-status-v').textContent = 'Đang băm lại giao dịch...';
+            
+            const txString = stableStringify(pkg.tx);
+            const hashBuf = await crypto.subtle.digest('SHA-256', enc(txString));
+            const hashHex = toHex(hashBuf);
+            
+            document.getElementById('vHash').innerHTML = `<div style="color: #007bff; font-weight: bold; margin-bottom: 8px;">🔄 Băm lại Transaction:</div>
+<div style="color: #6c757d; font-size: 10px; margin-bottom: 4px;">Input: ${txString.slice(0, 30)}...</div>
+<div style="color: #28a745; font-weight: bold; font-size: 10px;">SHA-256 Hash:</div>
+<div style="font-size: 9px; color: #495057; word-break: break-all;">0x${hashHex}</div>`;
+            document.getElementById('machine-status-v').textContent = 'Hoàn thành băm!';
+            await sleep(1500);
+            
+            // STEP 3: Verify signature  
+            clearHighlight('v2');
+            highlightCard('v3');
+            
+            // Import public key
+            const pubKey = await crypto.subtle.importKey(
+                'jwk',
+                pkg.alicePublicKey,
+                { name: 'ECDSA', namedCurve: 'P-256' },
+                false,
+                ['verify']
+            );
+            
+            // Decode signature
+            const sigBuf = b64urlDecode(pkg.signature);
+            
+            // Verify signature
+            const isValid = await crypto.subtle.verify(
+                { name: 'ECDSA', hash: 'SHA-256' },
+                pubKey,
+                sigBuf,
+                hashBuf
+            );
+            
+            document.getElementById('vVerify').innerHTML = `<div style="color: #007bff; font-weight: bold; margin-bottom: 8px;">🔐 Xác minh chữ ký:</div>
+<div style="color: #6c757d; font-size: 10px; margin-bottom: 4px;">Public Key: ${pkg.alicePublicKey.x.slice(0, 20)}...</div>
+<div style="color: #6c757d; font-size: 10px; margin-bottom: 4px;">Signature: ${pkg.signature.slice(0, 20)}...</div>
+<div style="color: #6c757d; font-size: 10px; margin-bottom: 8px;">Hash: 0x${hashHex.slice(0, 20)}...</div>
+<div style="color: ${isValid ? '#28a745' : '#dc3545'}; font-weight: bold; font-size: 12px;">
+${isValid ? '✅ Chữ ký HỢP LỆ' : '❌ Chữ ký KHÔNG HỢP LỆ'}
+</div>`;
+            await sleep(1500);
+            
+            // STEP 4: Final comparison and result
+            clearHighlight('v3');
+            highlightCard('v4');
+            
+            const result = isValid ? 'THÀNH CÔNG' : 'THẤT BẠI';
+            const resultColor = isValid ? '#28a745' : '#dc3545';
+            const resultIcon = isValid ? '✅' : '❌';
+            
+            document.getElementById('vCompare').innerHTML = `<div style="color: #007bff; font-weight: bold; margin-bottom: 8px;">🎯 Kết quả xác minh:</div>
+<div style="background: ${isValid ? '#d4edda' : '#f8d7da'}; border: 1px solid ${isValid ? '#c3e6cb' : '#f5c6cb'}; border-radius: 6px; padding: 12px; margin-bottom: 8px;">
+<div style="color: ${resultColor}; font-weight: bold; font-size: 14px; text-align: center;">
+${resultIcon} ${result}
+</div>
+</div>
+<div style="color: #6c757d; font-size: 9px; line-height: 1.2;">
+${isValid 
+    ? 'Chữ ký hợp lệ - gói tin được xác thực thành công.' 
+    : 'Chữ ký không hợp lệ - gói tin có thể bị thay đổi.'}
+</div>`;
+            
+            statusEl.textContent = `Xác minh hoàn tất: ${result}`;
+            await sleep(1000);
+            clearHighlight('v4');
+            
+        } catch (error) {
+            console.error('Verification error:', error);
+            statusEl.textContent = 'Lỗi: ' + error.message;
+            ['v1', 'v2', 'v3', 'v4'].forEach(clearHighlight);
+        }
+        
+        busy = false;
+        verifyBtn.disabled = false;
+    }
+    
+    function resetVerification() {
+        document.getElementById('vSplit').innerHTML = '<code>// …</code>';
+        document.getElementById('vHash').innerHTML = '<code>// …</code>';
+        document.getElementById('vVerify').innerHTML = '<code>// …</code>';
+        document.getElementById('vCompare').innerHTML = '<code>// …</code>';
+        document.getElementById('machine-status-v').textContent = 'Máy băm đang chờ…';
+        statusEl.textContent = 'Idle.';
+        ['v1', 'v2', 'v3', 'v4'].forEach(clearHighlight);
+        
+        // Clear input text
+        pkgInput.value = '';
+        
+        verifyBtn.disabled = false;
+        resetBtn.disabled = true;
+    }
+    
+    function loadFromStorage() {
+        if (window.cryptoPackageData) {
+            pkgInput.value = json(window.cryptoPackageData);
+            statusEl.textContent = 'Đã load gói tin từ bộ nhớ.';
+        } else {
+            statusEl.textContent = 'Không tìm thấy gói tin trong bộ nhớ.';
+        }
+    }
+    
+    // Event listeners
+    verifyBtn.addEventListener('click', runVerification);
+    resetBtn.addEventListener('click', resetVerification);
+    loadBtn.addEventListener('click', loadFromStorage);
+}
+
+// Initialize verifier when slide is loaded
+setTimeout(() => {
+    const verifyChecker = setInterval(() => {
+        const verifyBtn = document.getElementById('verifyRun');
+        if (verifyBtn) {
+            console.log('🎯 Found verifier elements, initializing...');
+            initializeVerifierAnimation();
+            clearInterval(verifyChecker);
+        }
+    }, 1000);
+}, 500);
+
+// ============ MERKLE TREE ANIMATION ============
+function initializeMerkleAnimation() {
+    const playBtn = document.getElementById('merkle-play');
+    const resetBtn = document.getElementById('merkle-reset');
+    const statusEl = document.getElementById('merkle-status');
+    const svg = document.getElementById('merkle-svg');
+    
+    if (!playBtn || !resetBtn || !statusEl || !svg) {
+        console.log('⏳ Merkle animation elements not found, will retry...');
+        return;
+    }
+    
+    console.log('✅ Merkle animation elements found, initializing...');
+    
+    let busy = false;
+    
+    // Helper functions
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    
+    // Positions (giống như code tham khảo)
+    const positions = {
+        A: {x: 100, y: 280}, B: {x: 220, y: 280}, C: {x: 420, y: 280}, D: {x: 540, y: 280},
+        AB: {x: 160, y: 190}, CD: {x: 480, y: 190}, ABCD: {x: 320, y: 100}
+    };
+    
+    function clearSvg() {
+        while (svg.lastChild) svg.removeChild(svg.lastChild);
+    }
+    
+    function createNode(id, label, klass) {
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('class', `node ${klass}`);
+        g.setAttribute('id', `merkle-${id}`);
+        
+        const pos = positions[id];
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', pos.x);
+        circle.setAttribute('cy', pos.y);
+        circle.setAttribute('r', 20);
+        
+        // Styling based on class
+        if (klass === 'leaf') {
+            circle.setAttribute('fill', '#ef4444');
+            circle.setAttribute('stroke', '#dc2626');
+        } else if (klass === 'parent') {
+            circle.setAttribute('fill', '#60a5fa');
+            circle.setAttribute('stroke', '#3b82f6');
+        } else if (klass === 'root') {
+            circle.setAttribute('fill', '#f59e0b');
+            circle.setAttribute('stroke', '#d97706');
+        }
+        circle.setAttribute('stroke-width', '3');
+        circle.setAttribute('opacity', '0.8');
+        
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', pos.x);
+        text.setAttribute('y', pos.y + 5);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('fill', 'white');
+        text.setAttribute('font-size', '14');
+        text.setAttribute('font-weight', 'bold');
+        text.textContent = label;
+        
+        g.appendChild(circle);
+        g.appendChild(text);
+        svg.appendChild(g);
+        return g;
+    }
+    
+    function createLine(from, to, opacity = 0.1) {
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', positions[from].x);
+        line.setAttribute('y1', positions[from].y);
+        line.setAttribute('x2', positions[to].x);
+        line.setAttribute('y2', positions[to].y);
+        line.setAttribute('stroke', '#7b86d1');
+        line.setAttribute('stroke-width', '3');
+        line.setAttribute('opacity', opacity);
+        line.setAttribute('id', `line-${from}-${to}`);
+        svg.appendChild(line);
+        return line;
+    }
+    
+    function drawEdgeAnimated(from, to, duration = 600) {
+        return new Promise(resolve => {
+            const line = document.getElementById(`line-${from}-${to}`);
+            if (!line) {
+                resolve();
+                return;
+            }
+            
+            const dx = positions[to].x - positions[from].x;
+            const dy = positions[to].y - positions[from].y;
+            const length = Math.hypot(dx, dy);
+            
+            line.style.strokeDasharray = length;
+            line.style.strokeDashoffset = length;
+            line.style.opacity = '0.8';
+            
+            const startTime = performance.now();
+            function animate(time) {
+                const progress = Math.min(1, (time - startTime) / duration);
+                line.style.strokeDashoffset = (1 - progress) * length;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    // Sau khi hoàn thành, giữ đường hiển thị
+                    line.style.strokeDasharray = 'none';
+                    line.style.strokeDashoffset = '0';
+                    resolve();
+                }
+            }
+            requestAnimationFrame(animate);
+        });
+    }
+    
+    function renderInitialNodes() {
+        clearSvg();
+        
+        // Vẽ tất cả đường nối trước (sẽ nằm dưới nodes)
+        createLine('A', 'AB');
+        createLine('B', 'AB');
+        createLine('C', 'CD');
+        createLine('D', 'CD');
+        createLine('AB', 'ABCD');
+        createLine('CD', 'ABCD');
+        
+        // Sau đó vẽ các nodes (sẽ nằm trên đường nối)
+        createNode('A', 'Tx A', 'leaf');
+        createNode('B', 'Tx B', 'leaf');
+        createNode('C', 'Tx C', 'leaf');
+        createNode('D', 'Tx D', 'leaf');
+        createNode('AB', 'H(A+B)', 'parent');
+        createNode('CD', 'H(C+D)', 'parent');
+        createNode('ABCD', 'Root', 'root');
+    }
+    
+    async function playAnimation() {
+        if (busy) return;
+        busy = true;
+        playBtn.disabled = true;
+        resetBtn.disabled = true;
+        statusEl.textContent = 'Đang xây dựng cây Merkle...';
+        
+        try {
+            // Step 1: Khởi tạo dữ liệu gốc
+            statusEl.textContent = 'Bước 1: Khởi tạo dữ liệu gốc (Transactions)';
+            await sleep(800);
+            
+            // Step 2: Build AB
+            statusEl.textContent = 'Bước 2: Tạo hash trung gian H(A+B)';
+            await Promise.all([
+                drawEdgeAnimated('A', 'AB', 600),
+                drawEdgeAnimated('B', 'AB', 600)
+            ]);
+            await sleep(500);
+            
+            // Step 3: Build CD
+            statusEl.textContent = 'Bước 3: Tạo hash trung gian H(C+D)';
+            await Promise.all([
+                drawEdgeAnimated('C', 'CD', 600),
+                drawEdgeAnimated('D', 'CD', 600)
+            ]);
+            await sleep(500);
+            
+            // Step 4: Build Root
+            statusEl.textContent = 'Bước 4: Tạo Merkle Root từ các hash trung gian';
+            await Promise.all([
+                drawEdgeAnimated('AB', 'ABCD', 700),
+                drawEdgeAnimated('CD', 'ABCD', 700)
+            ]);
+            
+            statusEl.textContent = 'Hoàn thành! Cây Merkle đã được xây dựng. ✅';
+            resetBtn.disabled = false;
+            
+        } catch (error) {
+            console.error('Merkle animation error:', error);
+            statusEl.textContent = 'Lỗi: ' + error.message;
+        }
+        
+        busy = false;
+        playBtn.disabled = false;
+    }
+    
+    function resetAnimation() {
+        renderInitialNodes();
+        statusEl.textContent = 'Sẵn sàng xây dựng cây.';
+        playBtn.disabled = false;
+        resetBtn.disabled = true;
+        busy = false;
+    }
+    
+    // Event listeners
+    playBtn.addEventListener('click', playAnimation);
+    resetBtn.addEventListener('click', resetAnimation);
+    
+    // Initial render
+    renderInitialNodes();
+}
+
+// Initialize Merkle animation when slide is loaded
+setTimeout(() => {
+    const merkleChecker = setInterval(() => {
+        const merkleBtn = document.getElementById('merkle-play');
+        if (merkleBtn) {
+            console.log('🎯 Found merkle elements, initializing...');
+            initializeMerkleAnimation();
+            clearInterval(merkleChecker);
+        }
+    }, 1000);
+}, 500);
